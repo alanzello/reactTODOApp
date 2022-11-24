@@ -32,7 +32,15 @@ const dropIn = {
   },
 };
 
+
+/**
+ *
+ * @param {*} param0
+ * @returns
+ */
+
 function TodoModal({ type, modalOpen, setModalOpen, todo }) {
+
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('incomplete');
@@ -40,6 +48,11 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
   const [file , setFile] = useState(null)
   const [preview , setPreview] = useState('')
   const [date , setDate] = useState('')
+
+
+  /**
+    return uploaded image
+  */
   useEffect(() =>{
     if(file){
       const reader = new FileReader()
@@ -51,6 +64,8 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
       setPreview(null)
     }
   },[file])
+
+/** updates todo values */
 
   useEffect(() => {
     if (type === 'update' && todo) {
@@ -66,12 +81,18 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
     }
   }, [type, todo, modalOpen]);
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title === '') {
       toast.error('Please enter a title');
       return;
     }
+
+/**
+ adding entered values into todo
+ */
     if (title && status) {
       if (type === 'add') {
         dispatch(
